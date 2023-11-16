@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../static/css/login-page.css">
+</head>
+<body>
+<div class="form-container">
+    <div class="form-login">
+        <form action="#" th:action="@{${baseUrl}/authenticateUser}" method="POST">
+            <h2>Login</h2>
+            <div class="input-group">
+                <i class="fa fa-user"></i>
+                <input type="text" name="username" class="input-text" autocomplete="off" placeholder="User Name">
+            </div>
+            <div class="input-group">
+                <i class="fa fa-unlock-alt"></i>
+                <input type="password" name="password" class="input-text" autocomplete="off" placeholder="Password">
+            </div>
+            <div class="" id="login-button">
+                <button>Submit</button>
+            </div>
+            <div class="footer">
+                <a>Forgot Password ?</a>
+                <a>Sign Up</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/login-page.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
