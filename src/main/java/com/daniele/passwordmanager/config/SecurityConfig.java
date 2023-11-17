@@ -19,6 +19,7 @@ public class SecurityConfig {
 
     @Value("${password-manager-base-url}")
     String baseUrl;
+    //abc
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(configurer->
