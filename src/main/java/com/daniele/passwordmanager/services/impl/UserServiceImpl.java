@@ -1,11 +1,8 @@
 package com.daniele.passwordmanager.services.impl;
 
 import com.daniele.passwordmanager.dto.UserDto;
-import com.daniele.passwordmanager.entities.Data;
 import com.daniele.passwordmanager.entities.User;
-import com.daniele.passwordmanager.exception.custom.DataNotFoundException;
 import com.daniele.passwordmanager.exception.custom.UserNotFoundException;
-import com.daniele.passwordmanager.mapper.UserMapper;
 import com.daniele.passwordmanager.repositories.UserRepository;
 import com.daniele.passwordmanager.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +16,22 @@ import java.util.Optional;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private UserMapper userMapper;
     @Transactional
     @Override
     public UserDto createUser(UserDto userDto) {
-        User user=userMapper.toUserEntity(userDto);
+        User user=UserDto.toUserEntity(userDto);
         userRepository.save(user);
-        return userMapper.toUserDto(user);
+        return UserDto.toUserDto(user);
     }
     @Override
     public UserDto getUserById(Long id) {
         User user=userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with this id: "+id));
-        return userMapper.toUserDto(user);
+        return UserDto.toUserDto(user);
     }
     @Override
     public List<UserDto> getAllUser() {
         List<User> userList=userRepository.findAll();
-        return userMapper.toUserDtoList(userList);
+        return UserDto.toUserDtoList(userList);
     }
     @Transactional
     @Override
@@ -44,7 +39,7 @@ public class UserServiceImpl implements IUserService {
         Optional<User> optionalUser=userRepository.findById(userDto.getId());
         User finalUser=new User();
         if(optionalUser.isPresent()){
-            User temp=userMapper.toUserEntity(userDto);
+            User temp=UserDto.toUserEntity(userDto);
             finalUser= User.builder()
                     .id(optionalUser.get().getId())
                     .firstName(temp.getFirstName())
@@ -58,20 +53,20 @@ public class UserServiceImpl implements IUserService {
         } else {
             throw new UserNotFoundException("User not found with this id: "+userDto.getId());
         }
-        return userMapper.toUserDto(finalUser);
+        return UserDto.toUserDto(finalUser);
     }
     @Transactional
     @Override
     public UserDto deleteUserById(Long id) {
         User user=userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with this id: "+id));
         userRepository.deleteById(id);
-        return userMapper.toUserDto(user);
+        return UserDto.toUserDto(user);
     }
     @Transactional
     @Override
     public List<UserDto> deleteAllUser() {
         List<User> userList=userRepository.findAll();
         userRepository.deleteAll();
-        return userMapper.toUserDtoList(userList);
+        return UserDto.toUserDtoList(userList);
     }
 }
